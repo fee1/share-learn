@@ -6,7 +6,58 @@
 
     <groupId>com.zxf</groupId>
     <artifactId>share-learn</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>user-center</module>
+        <module>video-server</module>
+    </modules>
 
+    <properties>
+        <!--设置编译版本-->
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
 
+        <user-center.version>1.0-SNAPSHOT</user-center.version>
+        <video-server.version>1.0-SNAPSHOT</video-server.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.zxf</groupId>
+                <artifactId>zxf-commons</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <profiles>
+        <profile>
+            <id>boot-app</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.zxf</groupId>
+                    <artifactId>boot-app</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>cloud-app</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.zxf</groupId>
+                    <artifactId>nacos-cloud-app</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 </project>
